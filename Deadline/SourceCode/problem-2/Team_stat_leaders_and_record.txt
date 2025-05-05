@@ -1,0 +1,22 @@
+Team rankings based on aggregate points:
+           Team          Atk          Def          Pos        Total
+      Liverpool       100.00        62.70        99.11        88.54
+      Brentford        60.60        75.31        57.05        63.95
+        Arsenal        70.75        30.97        86.51        63.54
+ Crystal Palace        47.57       100.00        46.88        63.10
+  Newcastle Utd        67.80        54.81        63.67        62.66
+    Bournemouth        55.52        76.46        46.75        59.17
+         Fulham        49.03        59.08        69.91        58.31
+Manchester City        62.63         5.42        88.29        53.17
+         Wolves        40.13        70.79        42.54        50.05
+Nott'ham Forest        48.79        73.10        27.92        49.82
+      Tottenham        47.57        33.54        52.37        44.80
+        Chelsea        52.65        14.65        59.39        43.27
+        Everton        22.24        73.71        29.35        39.82
+ Manchester Utd        22.78        55.90        45.86        39.64
+       West Ham        21.16        50.23        37.46        34.77
+       Brighton        33.73        29.62        36.62        33.36
+ Leicester City         8.66        54.03        28.13        28.11
+    Aston Villa        39.62         7.89        30.76        27.44
+    Southampton         0.00        19.15        25.17        13.30
+   Ipswich Town         8.25        16.19         0.00         8.16
