@@ -4,13 +4,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
-input_file1 = 'SourceCode/problem-1/results.csv'
-input_file2 = 'SourceCode/problem-4/results.csv'
+input_file = 'SourceCode/problem-4/results.csv'
 output_file = 'SourceCode/problem-4/predicted_vs_actual.csv'
 
-df1 = pd.read_csv(input_file1)
-df2 = pd.read_csv(input_file2)[['Player', 'Skill / Pot', 'ETV']]
-df = pd.merge(df1, df2, on='Player')
+df = pd.read_csv(input_file)
 
 # Data cleaning
 df['ETV'] = df['ETV'].str.extract(r'([\d.]+)').astype(float)
@@ -28,13 +25,16 @@ model = LinearRegression().fit(X_train, y_train)
 # Evaluate
 y_pred = model.predict(X_test)
 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+r2 = r2_score(y_test, y_pred)
+
 print(f"\nRMSE: {rmse:.4f}")
-print(f"R² Score: {r2_score(y_test, y_pred):.4f}\n")
+print(f"R² Score: {r2:.4f}\n")
 
 # Predicted vs Actual Results Table
 results_df = pd.DataFrame({
     "Actual ETV (€)": np.expm1(y_test),
     "Predicted ETV (€)": np.expm1(y_pred)
 })
+
 results_df.to_csv(output_file, index=False)
 print('Successful save to csv!')
