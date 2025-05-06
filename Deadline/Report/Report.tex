@@ -1,0 +1,400 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection.}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection.}{1em}{}
+
+\title{\textbf{Report Justification and Results}}
+\author{Vu Viet Thai – B23DCCE085}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Problem 1:}
+
+\textbf{Approach:} \textit{problem-1} has the task of collecting data about players who play in the \textit{Premier League} on the website \href{https://fbref.com/en/}{FBref.com}. It is designed to:
+
+\begin{itemize}
+    \item \textit{Access the website:} Connect to FBref to obtain data.
+    \item \textit{Search for the league:} Identify the Premier League page.
+    \item \textit{Get team data:} Browse the list of teams, then access each team page.
+    \item \textit{Extract player data:} Collect various types of statistics, including: 
+    
+    \begin{itemize}
+        \item Standard Stats.
+        \item Goalkeeping.
+        \item Shooting.
+        \item Passing.
+        \item Goal and Shot Creation.
+        \item Defensive Actions.
+        \item Possession.
+        \item Miscellaneous Stats.
+    \end{itemize}
+    
+    \item \textit{Save results:} The final data are saved to a CSV file (results.csv).
+\end{itemize}
+
+\textbf{Results:} After running the program, a data table containing detailed information about the \textit{Premier League} players will be saved in the results.csv file, including:
+
+\begin{itemize}
+    \item \textbf{Standard Stats:} Player name, Nation, Team, Position (Pos), Age, Matches Played (MP), Starts, Minutes played (Min), Goals scored (Gls\_st), Assists (Ast\_st), Yellow cards (CrdY\_st), Red cards (CrdR\_st), Expected goals (xG\_st), Expected assists (xAG\_st), Progressive carries (PrgC\_st), Progressive passes (PrgP\_st), Progressive passes received (PrgR\_st), Goals per 90 minutes (Gls\_st\_per90), Assists per 90 minutes (Ast\_st\_per90), Expected goals per 90 minutes (xG\_st\_per90), Expected assists per 90 minutes (xAG\_st\_per90).
+    \item \textbf{Goalkeeping Stats:} Goals against per 90 minutes (GA90\_gk), Save percentage (\%) (Save\%\_gk), Clean sheet percentage (\%) (CS\%\_gk), Penalty save percentage (\%) (Save\%\_gk\_pen).
+    \item \textbf{Shooting Stats:} Shots on target percentage (\%) (SoT\%\_sh), Shots on target per 90 minutes (SoT/90\_sh), Goals per shot (G/Sh\_sh), Average shot distance (Dist\_sh).
+    \item \textbf{Passing Stats:} Completed passes (Cmp\_pas), Pass completion rate (\%) (Cmp\%\_pas), Short pass completion rate (\%) (Cmp\%\_pas\_S), Medium pass completion rate (\%) (Cmp\%\_pas\_M), Long pass completion rate (\%) (Cmp\%\_pas\_L), Key passes (KP\_pas), Passes into final third (1/3\_pas), Passes into penalty area (PPA\_pas), Crosses into penalty area (CrsPA\_pas), Progressive passes (PrgP\_pas).
+    \item \textbf{Goal and Shot Creation Stats:} Shot-creating actions (SCA\_gsc), Shot-creating actions per 90 minutes (SCA90\_gsc), Goal-creating actions (GCA\_gsc), Goal-creating actions per 90 minutes (GCA90\_gsc).
+    \item \textbf{Defensive Actions Stats:} Tackles (Tkl\_def), Tackles won (TklW\_def), Challenges attempted (Att\_def), Challenges lost (Lost\_def), Blocks (Blocks\_def), Shots blocked (Sh\_def), Passes blocked (Pass\_def), Interceptions (Int\_def).
+    \item \textbf{Possession Stats:} Touches (Touches\_pos), Touches in defensive penalty area (Def Pen\_pos), Touches in defensive third (Def 3rd\_pos), Touches in middle third (Mid 3rd\_pos), Touches in attacking third (Att 3rd\_pos), Touches in attacking penalty area (Att Pen), Dribbles attempted (Att\_pos), Successful dribble percentage (\%) (Succ\%\_pos), Dispossessed percentage (\%) (Tkld\%\_pos), Ball carries (Carries\_pos), Total progressive carrying distance (PrgDist\_pos), Progressive carries (PrgC\_pos), Carries into final third (1/3\_pos), Carries into penalty area (CPA\_pos), Miscontrols (Mis\_pos), Dispossessed (Dis\_pos), Passes received (Rec\_pos), Progressive passes received (PrgR\_pos).
+    \item \textbf{Miscellaneous Stats:} Fouls committed (Fls\_mis), Fouls drawn (Fld\_mis), Offsides (Off\_mis), Crosses (Crs\_mis), Ball recoveries (Recov\_mis), Aerial duels won (Won\_mis), Aerial duels lost (Lost\_mis), Aerial duel win percentage (\%) (Won\%\_mis).
+\end{itemize}
+
+The results.csv file contains a list of players with all of the above parameters, helping to analyze or use for deeper reporting on players in the Premier League.
+
+\section{Problem 2:}
+
+\subsection*{A. Problem-2a:}
+
+\textbf{Approach:} \textit{problem-2a} has the task of processing data from the results.csv file (results of problem-1) to find \textit{the top three players and the bottom three players for each statistical indicator} in the data. The implementation process includes the following.
+
+\begin{itemize}
+    \item \textit{Reading the data:} The CSV file containing information about Premier League players is loaded into a DataFrame.
+    \item \textit{Data processing:}
+    
+    \begin{itemize}
+        \item Remove columns containing non-numeric information (Player, Nation, Team, Pos).
+        \item Convert N/a data to 0.0 to ensure calculations do not produce errors.
+        \item Convert the values of numeric columns to numeric data types (int64, float64).
+    \end{itemize}
+    
+    \item \textit{Sort and select players:}
+    
+    \begin{itemize}
+        \item Sort each statistical column by value from low to high.
+        \item Take the three players with the lowest values and the three players with the highest values for each indicator.
+    \end{itemize}
+    
+    \item \textit{Write results to file:} Save the list of players with top \& bottom 3 for each indicator to the Top\_and\_Bottom\_3\_statistics.txt file.
+\end{itemize}
+
+\textbf{Results:} After running the program, the Top\_and\_Bottom\_3\_statistics.txt file will contain a list of \textit{best and worst players} for each statistical indicator in the data, including:
+
+\begin{itemize}
+    \item Number of goals, number of assists.
+    \item Defensive performance, passing.
+    \item Advanced metrics such as xG (expected goals), CS\% (clean sheet percentage for goalkeepers), Tkl\_def (number of tackles), etc.
+    \item Special indicators for \textit{passing, saves, dribbling} and many other factors.
+\end{itemize}
+
+This file helps easily \textit{analyze strengths \& weaknesses} of each player in the league, supporting statistics, evaluation, or making more in-depth assessments.
+
+\subsection*{B. Problem-2b:}
+\textbf{Approach:} \textit{problem-2b} is designed to calculate important statistics for each team in the \textit{Premier League}. It processes data from the results.csv file (results of problem-1) to determine:
+
+\begin{itemize}
+    \item \textit{Mean value} -- The average value of each indicator within the team.
+    \item \textit{Median value} -- The midpoint of the data, helping to eliminate the influence of outliers.
+    \item \textit{Standard Deviation} -- Measuring the variability of each indicator within the team.
+\end{itemize}
+
+The key steps include:
+
+\begin{itemize}
+    \item \textit{Reading data} from the results.csv file (results of problem-1).
+    \item \textit{Removing unnecessary columns}: Player, Nation, Age, Pos, keeping only data by team.
+    \item \textit{Processing data}: Converting N/a values to 0.0 and forcing data types to ensure calculations do not encounter errors.
+    \item \textit{Calculating statistics} for each team.
+    \item \textit{Saving results}: The calculated data are saved to the results.csv file.
+\end{itemize}
+
+\textbf{Results:} After running the program, the results.csv file will contain:
+
+\begin{itemize}
+    \item List of teams in the \textit{Premier League}.
+    \item Mean, median, and standard deviation of each indicator (e.g., goals, assists, shot accuracy percentage, number of tackles, etc.).
+    \item An overview of the stability or performance disparity between teams.
+\end{itemize}
+
+This file is used to \textit{analyze} and \textit{compare the strength} of teams, as well as identify which teams play consistently and which teams have large performance fluctuations.
+
+\subsection*{C. Problem-2c:}
+\textbf{Approach:} \textit{problem-2c} has the task of \textit{creating histograms} to visualize \textit{attacking} and \textit{defensive} indicators of players in the \textit{Premier League}. Specifically, it performs the following steps:
+
+\begin{itemize}
+    \item \textit{Reading data} from the results.csv file (results of problem-1) containing player information.
+    \item \textit{Data processing:}
+    
+    \begin{itemize}
+        \item Converting relevant data columns (Gls\_st, Ast\_st, xG\_st, Tkl\_def, Int\_def, Blocks\_def) to numeric types.
+        \item Filling missing values (NaN) with 0.0 to avoid errors when drawing charts.
+    \end{itemize}
+    
+    \item \textit{Drawing histograms:}
+    
+    \begin{itemize}
+        \item Creating 6 \textit{charts}, divided into 2 \textit{rows}, 3 \textit{columns}.
+        \item Each chart represents an indicator:
+        
+        \begin{itemize}
+            \item \textit{Attacking}: Goals (Gls\_st), Assists (Ast\_st), Expected Goals (xG\_st).
+            \item \textit{Defensive}: Tackles (Tkl\_def), Interceptions (Int\_def), Blocks (Blocks\_def).
+        \end{itemize}
+        
+        \item Using \textit{different colors} for each chart for easy differentiation.
+        \item \textit{Adding titles}, axis labels, and grids to enhance readability.
+    \end{itemize}
+    
+    \item \textit{Saving results}: The chart is saved as histogram\_premier\_league.png for viewing.
+\end{itemize}
+
+\textbf{Results:} After running the program, the result is:
+
+\begin{itemize}
+    \item \textit{An image containing 6 histograms}, visualizing \textit{Premier League} players' performance by \textit{attacking \& defensive indicators}.
+    \item Easy identification of the distribution of \textit{goals, assists, expected goals, tackles, blocks, interceptions} among players.
+    \item Support for \textit{performance analysis} to find players with strong attacking play or solid defense.
+\end{itemize}
+
+\subsection*{D, Problem-2d:}
+
+\textbf{Approach:} \textit{problem-2d} has the task of \textit{identifying the team with the best performance} in the season based on a set of statistical indicators. It performs the following steps:
+
+\begin{itemize}
+    \item \textit{Reading data} from the results.csv file (results of problem-2b), containing average statistics for each team.
+    \item \textit{Categorizing indicators}:
+    
+    \begin{itemize}
+        \item \textit{Attack} (\textbf{Atk}): Number of goals (Gls\_st), number of assists (Ast\_st), expected goals (xG\_st).
+        \item \textit{Defense} (\textbf{Def}): Number of tackles (Tkl\_def), number of interceptions (Int\_def), number of blocks (Blocks\_def).
+        \item \textit{Possession} (\textbf{Pos}): Pass success rate (Cmp\_pas), number of progressive passes (PrgP\_pas), number of touches (Touches\_pos).
+    \end{itemize}
+    
+    \item \textit{Data normalization}: Converting the value of each indicator to the same scale (from 0 to 1) for easier comparison.
+    \item \textit{Calculating composite scores}:
+    
+    \begin{itemize}
+        \item \textit{Attack} score accounts for \textbf{40\%} of total score.
+        \item \textit{Defense} score accounts for \textbf{30\%} of total score.
+        \item \textit{Possession} score accounts for \textbf{30\%} of total score.
+    \end{itemize}
+    
+    \item \textit{Ranking teams} by composite score to determine \textit{the team with the best performance in the season}.
+    \item \textit{Saving results} to the Team\_stat\_leaders\_and\_record.txt file.
+\end{itemize}
+
+\textbf{Results:} After running the program, the results include:
+
+\begin{itemize}
+    \item \textit{List of teams} ranked by composite score from highest to lowest.
+    \item An overview of the \textit{best performing teams}, based on \textit{attacking performance, defense, and ball possession}.
+    \item The team with the \textit{best performance} in the season, clearly displayed with their composite score.
+\end{itemize}
+
+This file helps \textit{compare strength between teams}, find the team with the strongest attacking style, the most solid defense, or the team with the best match control.
+
+\section{Problem 3:}
+
+\subsection*{A, Problem-3a:}
+
+\textbf{Approach:} \textit{problem-3a} uses the \textit{Elbow Method} to find the optimal number of clusters (K) in \textit{K-Means clustering}. Its main objectives are:
+
+\begin{itemize}
+    \item \textit{Reading data} from the results.csv file (results of problem-1), which contains statistical information about players.
+    \item \textit{Data preprocessing}:
+    
+    \begin{itemize}
+        \item Selecting columns containing numerical values.
+        \item Normalizing data using \textit{StandardScaler} to ensure features have the same scale, helping the clustering algorithm work better.
+    \end{itemize}
+    
+    \item \textit{K-Means clustering:}
+    
+    \begin{itemize}
+        \item Running K-Means with number of clusters from \textit{1 to 10}.
+        \item Recording \textit{intra-group variability} (Inertia) for each cluster number K.
+    \end{itemize}
+    
+    \item \textit{Drawing the Elbow chart:}
+    
+    \begin{itemize}
+        \item X-axis: Number of clusters (K).
+        \item Y-axis: Value of \textit{intra-group variability} (Inertia).
+        \item Finding the Elbow point, where variability begins to decrease more slowly (this is the optimal K value).
+    \end{itemize}
+    
+    \item \textit{Saving} the chart as Find\_the\_optimal\_k.png.
+\end{itemize}
+
+\textbf{Results:} After running the program, the results include:
+
+\begin{itemize}
+    \item \textit{An Elbow chart}, helping to determine the most suitable number of clusters in player data analysis.
+    \item Results supporting the selection of \textit{optimal K}, helping classify players based on statistical characteristics.
+    \item A scientific approach to grouping players with similar playing styles.
+\end{itemize}
+
+\textbf{Comments on results:} Based on the \textit{Elbow Method} chart from Find\_the\_optimal\_k.png, the \textit{Elbow} point appears at K = 3, meaning this method suggests that 3 \textit{groups} is the optimal number of clusters to classify players. This is the level where intra-group variability (inertia) decreases sharply, but then the rate of decrease slows down as the number of clusters increases. The significance of 3 groups may be \textit{outstanding attacking players} with notable goal-scoring and assist abilities, \textit{strong defensive players} possessing good tackling, interception, and blocking skills, and \textit{good ball control players} with high pass rates and effective ball retention.
+
+\subsection*{B, Problem-3b:}
+
+\textbf{Approach:} \textit{problem-3b} uses \textit{K-Means} clustering combined with \textit{Principal Component Analysis} (PCA) to classify players based on their statistics. The main objectives are:
+
+\begin{itemize}
+    \item \textit{Data Processing:}
+    
+    \begin{itemize}
+        \item Reading data from results.csv (output from problem-1) and filtering columns containing player statistics.
+        \item Normalizing data using StandardScaler to ensure equal scale for all features.
+        \item Using PCA to reduce dimensionality to 2 \textit{principal components}, making visualization easier.
+    \end{itemize}
+    
+    \item \textit{Clustering with K-Means:}
+    
+    \begin{itemize}
+        \item Identifying 3 \textit{player groups} (according to results from the \textit{Elbow} method).
+        \item Assigning each player to a cluster based on their statistical characteristics.
+    \end{itemize}
+    
+    \item \textit{Drawing the clustering chart:}
+    
+    \begin{itemize}
+        \item Displaying player data on the axis system \textit{PCA Component 1 \& Component 2.}
+        \item Using colors (viridis color palette) to distinguish groups.
+        \item Marking \textit{centroids} in red to see the average position of each group.
+    \end{itemize}
+    
+    \item \textit{Saving} the chart as KMeans\_clustering.png.
+    
+\end{itemize}
+\textbf{Results:} The program outputs include:
+
+\begin{itemize}
+    \item \textit{A 2D chart} showing player clustering based on their statistical data.
+    \item \textit{Three clear groups}, which may represent:
+    
+    \begin{itemize}
+        \item Group  1: Attacking players (good at shooting, assisting).
+        \item Group  2: Defensive players (good at tackling, blocking).
+        \item Group  3: Ball control players (good at passing and ball retention).
+    \end{itemize}
+    
+    \item Easy identification of \textit{common characteristics} of each group, helping analyze and optimize tactics.
+\end{itemize}
+
+\section{Problem 4}
+
+\subsection*{A, Problem-4a}
+
+\textbf{Approach:} \textit{problem-4a} performs \textit{data collection on transfer values of Premier League} players from the website \href{https://www.footballtransfers.com/en}{FootballTransfers.com} using \textit{web scraping} with Selenium. The main objectives are:
+
+\begin{itemize}
+    \item \textit{Reading data} from the results.csv file (results of problem-1), getting a list of players including: Player, Pos, Team, Age, and Min > 900.
+    \item \textit{Setting up Selenium browser}:
+    
+    \begin{itemize}
+        \item Configuring \textit{Chrome} browser to run \textit{headless} (no window display).
+        \item \textit{Automatically navigating} to the FootballTransfers website.
+        \item \textit{Disabling notifications}, avoiding SSL certificate errors.
+    \end{itemize}
+    
+    \item \textit{Interacting with the website:}
+    
+    \begin{itemize}
+        \item \textit{Closing notification pop-ups} if they appear.
+        \item \textit{Moving the mouse to} "Players" section.
+        \item \textit{Clicking on} "All Premier League Players" to access the player list page.
+    \end{itemize}
+    
+    \item \textit{Collecting data:}
+    
+    \begin{itemize}
+        \item Browsing through each player list page.
+        \item \textit{Getting information} about Skill, Pot, and transfer value (ETV).
+        \item Saving data to the all\_players list.
+    \end{itemize}
+    
+    \item \textit{Saving results} to results.csv.
+\end{itemize}
+
+\textbf{Results:} After running the program, the results include:
+
+\begin{itemize}
+    \item \textit{A list of Premier League players} with information:
+    
+    \begin{itemize}
+        \item \textit{Player, Pos, Team, Age, Min}.
+        \item \textit{Skill} and \textit{Pot}, showing level of expertise.
+        \item \textit{Expected Transfer Value} (ETV) from FootballTransfers.
+    \end{itemize}
+    
+    \item \textit{CSV file containing players meeting criteria} (>900 minutes played), useful for data analysis or machine learning models.
+\end{itemize}
+
+\subsection*{B, Problem-4b}
+
+\textbf{Approach:} \textit{problem-4b} helps \textit{build a player valuation model} based on statistical parameters. It combines data on \textit{Min, Age, Skill, Pot} with actual transfer values (ETV) to predict player value.
+Key steps:
+
+\begin{itemize}
+    \item \textit{Reading data} from results.csv (results of problem-1) containing player statistics and results.csv (results of problem-4a) containing transfer values.
+    \item \textit{Data processing}:
+    
+    \begin{itemize}
+        \item \textit{Normalizing ETV} by extracting real numbers from strings.
+        \item \textit{Converting Age} to numeric form (years + days/365) to increase accuracy.
+        \item \textit{Separating skill and potential information} (Skill / Pot).
+        \item \textit{One-hot encoding for Pos} to turn player positions into numeric features.
+    \end{itemize}
+    
+    \item \textit{Building machine learning model:}
+    
+    \begin{itemize}
+        \item Choosing \textit{Linear Regression} to predict player value based on input factors.
+        \item Applying \textit{log transformation} (log1p(ETV)) to handle skewed distribution of transfer values.
+        \item Splitting the dataset into \textit{train} (80\%) and \textit{test} (20\%).
+    \end{itemize}
+    
+    \item \textit{Evaluating the model:}
+    
+    \begin{itemize}
+        \item Calculating \textit{RMSE} (Root Mean Squared Error) to measure the difference between actual and predicted values.
+        \item Calculating \textit{R² Score}, reflecting the model's goodness of fit.
+    \end{itemize}
+    
+    \item \textit{Exporting results}: Comparing predicted values with actual values, saving to predicted\_vs\_actual.csv.
+\end{itemize}
+
+\textbf{Results}: The results obtained after running the model will include:
+
+\begin{itemize}
+    \item \textit{Predicted \& actual values} of player transfer values in predicted\_vs\_actual.csv.
+    \item \textit{RMSE} $\approx$ 0.3954 (low) shows \textit{model has small error}, meaning player transfer value predictions are relatively accurate.
+    \item \textit{R² Score} $\approx$ 0.7786 (high) shows the model reflects the player valuation trend well.
+\end{itemize}
+
+\textbf{Feature and Model Selection:}
+
+\begin{itemize}
+    \item Feature selection: Features are selected based on \textit{potential relationship with player value}:
+    
+    \begin{itemize}
+        \item \textit{Age}: Younger players typically have higher value.
+        \item \textit{Min}: Players who play more often are typically valued higher.
+        \item \textit{Skill} and \textit{Pot}: Higher scores indicate capability.
+        \item \textit{Pos}: An excellent striker typically has higher value than a defender.
+    \end{itemize}
+    
+    \item Model selection: \textit{Linear Regression} was chosen because:
+    
+    \begin{itemize}
+        \item Player value often has a linear relationship with performance indicators.
+        \item Easy to interpret and suitable for small-scale data.
+        \item Can be improved by applying \textit{log transformation} to handle skewed distribution.
+    \end{itemize}
+    
+\end{itemize}
+
+\end{document}
